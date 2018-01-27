@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
-
+import _ from 'lodash';
+let OrbitControls = require('three-orbit-controls')(THREE);
+import BottomFace from '../geometry/BottomFace';
 export default class Scene extends Component{
 
   componentDidMount(){
@@ -14,16 +16,20 @@ export default class Scene extends Component{
       const camera = new THREE.PerspectiveCamera(
         75, width/height,1,1000
       )
-      camera.position.z = 1;
+      camera.position.z = 5;
+      let controls = new OrbitControls(camera)
       const renderer = new THREE.WebGLRenderer({antialias: true})
       renderer.setClearColor('#90A4AE')
       renderer.setSize(width, height)
 
+      let bottom = BottomFace();
+      _.forEach(bottom, (value,key) => {scene.add(value)})
 
       this.scene = scene
       this.camera = camera
       this.renderer = renderer
-
+      this.controls = controls
+      this.controls.update();
       this.mount.appendChild(this.renderer.domElement)
       this.start()
   }
@@ -46,6 +52,8 @@ export default class Scene extends Component{
   animate() {
     this.renderScene()
     this.frameId =  window.requestAnimationFrame(this.animate)
+    this.controls.update();
+
   }
 
   renderScene() {
