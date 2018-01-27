@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output:{
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'docs')
   },
   module: {
     loaders: [
@@ -25,12 +25,12 @@ module.exports = {
     ],
   },
   devServer: {
-        contentBase: path.resolve(__dirname, "public"),
+        contentBase: path.resolve(__dirname, "docs"),
         port: 3001
       },
   plugins: [
         new HtmlWebPackPlugin({
-            template: "./public/index.html",
+            template: "./docs/index.html",
             filename: "./index.html"
           })
         ]
