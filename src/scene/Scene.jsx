@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import * as THREE from 'three';
 import _ from 'lodash';
 let OrbitControls = require('three-orbit-controls')(THREE);
-import BottomFace from '../geometry/BottomFace';
-import CenterFace from '../geometry/CenterFace';
-import FrontFace from '../geometry/FrontFace';
 import CubeFactory from '../services/CubeFactory';
 import * as LightFactory from '../services/LightFactory';
 export default class Scene extends Component{
