@@ -1,15 +1,16 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {changeCube} from './SceneActions';
+import {rightTurn} from './SceneActions';
 import Scene from './Scene.jsx';
 
 const mapStateToProps = (state) => ({
-  cube: state.sceneReducer.cube
+  cubeState: state.sceneReducer.cubecubeState,
+  rubiksCube: state.sceneReducer.rubiksCube
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  changeCube: changeCube }, dispatch);
+  rightTurn: rightTurn }, dispatch);
 
 const SceneContainer = connect(mapStateToProps, mapDispatchToProps)(Scene);
 

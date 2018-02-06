@@ -1,1 +1,1 @@
-export const CHANGE_CUBE = 'CHANGE_CUBE';
+export const RIGHT_TURN = 'RIGHT_TURN';

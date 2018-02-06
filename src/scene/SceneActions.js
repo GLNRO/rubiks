@@ -1,5 +1,13 @@
-export const CHANGECube = () => {
+export const rightTurn = (rubiks) => {
   return {
-    type:  'CHANGE_CUBE'
+    type:  'RIGHT_TURN',
+    rubiks
   }
+}
+
+
+export const updateCubeAction = () => {
+ return {
+   type: 'RIGHT_CLOCK'
+ }
 }
