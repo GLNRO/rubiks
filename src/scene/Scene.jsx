@@ -25,10 +25,14 @@ export default class Scene extends Component{
       renderer.setClearColor('#90A4AE')
       renderer.setSize(width, height)
 
+      this.rotationDegree = 0
+      let xAxis = new THREE.Vector3(1,0,0)
       let cubes = CubeFactory()
       let rubiks = new RubiksCube(cubes)
       _.forEach(cubes, (cube) => {scene.add(cube)})
-
+      this.isRotating = false
+      this.xAxis = xAxis
+      // scene.add(this.xAxis)
       this.scene = scene
       this.camera = camera
       this.renderer = renderer
@@ -55,6 +59,25 @@ export default class Scene extends Component{
   }
 
   animate() {
+    let degree = (Math.PI/2)/90
+    let rightFaceIdx = ['A', 'D', 'G', 'J', 'M', 'P', 'S', 'N', 'Y']
+    // console.log(this.props.cubeState)
+    let rightFace = []
+
+    _.forEach( rightFaceIdx, (key) => {
+      rightFace.push(this.rubiks.state.cubes[this.props.cubeState[key]])
+    })
+    while(this.isRotating == true){
+      for(var i = 0; i<90; i++){
+        _.forEach( rightFace, (mesh) => {
+          mesh.rotation.x += degree
+        })
+
+      }
+      this.isRotating = false
+    }
+
+
     this.renderScene()
     this.frameId =  window.requestAnimationFrame(this.animate)
     this.controls.update();
@@ -69,13 +92,29 @@ export default class Scene extends Component{
     this.scene.add(element)
   }
 
-  render() {
 
+
+  rotateRight(rightTurn, cubeState){
+    // let rightFace = new THREE.Group();
+    // _.forEach( rightFaceIdx, (key) => {
+    //   rightFace.add(this.rubiks.state.cubes[cubeState[key]])
+    // })
+    this.isRotating = true
+    // rightFace.rotateOnAxiss(this.xAxis, Math.PI/2)
+    // console.log(rightFace)
+    rightTurn(this.rubiks)
+    console.log(this.rubiks)
+    console.log(cubeState)
+
+  }
+
+  render() {
     const {cubeState, rightTurn } = this.props;
+
     return (
       <div>
         <div id="controls">
-          <button onClick={ event => rightTurn(this.rubiks)}>Right Turn</button>
+          <button onClick={ event => this.rotateRight(rightTurn, cubeState)}>Right Turn</button>
         </div>
         <div
           id="WebGL-output"

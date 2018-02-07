@@ -13,9 +13,8 @@ const sceneReducer = (state = initialState, action) => {
     case RIGHT_TURN:
       let newState = rightTurn(state.cubeState);
       console.log("Reducer turn Right")
-      console.log(newState);
       let rubiks = action.rubiks
-      return {...state, rubiksCube: rubiks }
+      return {...state, cubeState: newState, rubiksCube: rubiks }
     default:
       return state
   }

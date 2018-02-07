@@ -5,7 +5,7 @@ import {rightTurn} from './SceneActions';
 import Scene from './Scene.jsx';
 
 const mapStateToProps = (state) => ({
-  cubeState: state.sceneReducer.cubecubeState,
+  cubeState: state.sceneReducer.cubeState,
   rubiksCube: state.sceneReducer.rubiksCube
 });
 
